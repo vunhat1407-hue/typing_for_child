@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Mây Gõ Phím - hành trình học gõ 10 ngón vui nhộn dành cho bé."
+    />
+    <meta name="theme-color" content="#7559e8" />
+    <title>Mây Gõ Phím — Học gõ 10 ngón thật vui</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Điều hướng chính">
+        <a class="brand" href="#" aria-label="Mây Gõ Phím - Trang chủ">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64" role="img">
+              <path d="M16 43c-6 0-10-4-10-10s4-10 10-10h1C19 14 26 9 35 9c10 0 18 7 19 17 4 1 7 5 7 9 0 6-5 10-11 10H16Z" fill="currentColor" />
+              <path d="M22 30c3-5 7-7 12-7s9 2 12 7v13H22V30Z" fill="#fff" opacity=".96" />
+              <path d="m25 26 2-7 6 5m10 2-2-7-6 5" fill="#fff" stroke="#493698" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+              <circle cx="30" cy="33" r="2" fill="#493698" />
+              <circle cx="40" cy="33" r="2" fill="#493698" />
+              <path d="M33 38c1.5 1.3 2.7 1.3 4 0" fill="none" stroke="#493698" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </span>
+          <span>Mây Gõ Phím</span>
+        </a>
+
+        <nav class="main-nav">
+          <button class="nav-item active" type="button" data-view="home" aria-current="page">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1v-9.5Z" /></svg>
+            </span>
+            Hành trình
+          </button>
+          <button class="nav-item" type="button" data-view="practice">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M5 7h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Zm1 4h2m2 0h2m2 0h2m2 0h1M6 15h2m2 0h6m2 0h1" /></svg>
+            </span>
+            Luyện tập
+          </button>
+          <button class="nav-item" type="button" data-view="game">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M8 9h8a5 5 0 0 1 4.8 6.4l-.8 2.7a2.6 2.6 0 0 1-4.4 1l-1.3-1.4H9.7l-1.3 1.4a2.6 2.6 0 0 1-4.4-1l-.8-2.7A5 5 0 0 1 8 9Zm-1 4v3m-1.5-1.5h3M16 13h.01M18 15h.01M9 9 8 5m7 4 1-4" /></svg>
+            </span>
+            Trò chơi
+          </button>
+          <button class="nav-item" type="button" data-view="achievements">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.8 1-6.1-4.4-4.3 6.1-.9L12 3Z" /></svg>
+            </span>
+            Bộ sưu tập
+          </button>
+        </nav>
+
+        <div class="daily-card">
+          <div class="daily-card-top">
+            <span class="tiny-flame" aria-hidden="true">✦</span>
+            <strong>Mục tiêu hôm nay</strong>
+          </div>
+          <div class="goal-ring" aria-label="Tiến độ mục tiêu hôm nay">
+            <svg viewBox="0 0 42 42" aria-hidden="true">
+              <circle class="goal-ring-track" cx="21" cy="21" r="16" />
+              <circle class="goal-ring-value" cx="21" cy="21" r="16" />
+            </svg>
+            <span id="daily-count">0/3</span>
+          </div>
+          <p>Hoàn thành 3 lượt luyện để nhận thêm một ngôi sao!</p>
+        </div>
+
+        <button class="sound-button" id="sound-toggle" type="button" aria-pressed="true">
+          <span class="sound-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5 10v4h4l5 4V6l-5 4H5Zm12.5-1.5a5 5 0 0 1 0 7M19.5 6a9 9 0 0 1 0 12" /></svg>
+          </span>
+          <span>Âm thanh</span>
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+        </button>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <button class="mobile-menu" type="button" aria-label="Mở menu" aria-expanded="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          </button>
+          <div class="welcome-copy">
+            <span class="eyebrow">CHÀO MỪNG TRỞ LẠI</span>
+            <h1>Hôm nay mình cùng gõ thật vui nhé! <span aria-hidden="true">☀</span></h1>
+          </div>
+          <div class="topbar-actions">
+            <div class="star-balance" title="Tổng số sao">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2.8 2.8 5.7 6.3.9-4.6 4.5 1.1 6.3-5.6-2.9-5.6 2.9 1.1-6.3-4.6-4.5 6.3-.9L12 2.8Z" /></svg>
+              <strong id="star-count">0</strong>
+            </div>
+            <button class="profile-button" type="button" aria-label="Hồ sơ của bé">
+              <span class="profile-avatar" aria-hidden="true">🐼</span>
+              <span class="profile-name">Bé chăm chỉ</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 10 4 4 4-4" /></svg>
+            </button>
+          </div>
+        </header>
+
+        <section class="view active" id="home-view" aria-labelledby="home-title">
+          <div class="hero-card">
+            <div class="hero-decoration hero-decoration-one" aria-hidden="true">✦</div>
+            <div class="hero-decoration hero-decoration-two" aria-hidden="true">●</div>
+            <div class="hero-copy">
+              <span class="hero-kicker"><span>✦</span> Chặng tiếp theo của bé</span>
+              <h2 id="home-title">Mỗi ngón tay là<br />một <em>siêu anh hùng!</em></h2>
+              <p>Đặt tay đúng vị trí, nhìn vào màn hình và cùng Miu chinh phục bàn phím nào.</p>
+              <button class="primary-button" id="hero-start" type="button">
+                <span>Học tiếp nào</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
+              </button>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <div class="spark spark-one">✦</div>
+              <div class="spark spark-two">✦</div>
+              <svg class="cat-mascot" viewBox="0 0 310 250">
+                <ellipse cx="163" cy="220" rx="105" ry="16" fill="#5d43bd" opacity=".16" />
+                <path d="M74 182c-28 3-43-13-39-30 3-12 13-18 24-17-3-15 6-26 21-27 10-19 30-23 45-14 13-16 40-14 51 4 17-8 38 1 42 19 17-2 32 10 32 27 0 23-20 40-48 40H74Z" fill="#fff" opacity=".95" />
+                <path d="M102 109c2-28 17-49 48-51 32-3 56 17 61 46l2 44c-3 33-24 53-55 54-35 2-58-19-60-53l4-40Z" fill="#ffd76e" />
+                <path d="m108 83 5-40 34 25m56 10-11-39-28 25" fill="#ffd76e" stroke="#593d9e" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="m117 63 3-11 12 9m55-1-3-11-10 9" fill="#ff9fb5" />
+                <path d="M103 113c13-6 23-5 31 2m43-3c10-6 19-5 28 1" fill="none" stroke="#593d9e" stroke-width="5" stroke-linecap="round" />
+                <path d="M125 123c0 7-5 12-11 12s-11-5-11-12 5-12 11-12 11 5 11 12Zm78-1c0 7-5 12-11 12s-11-5-11-12 5-12 11-12 11 5 11 12Z" fill="#fff" />
+                <circle cx="116" cy="124" r="5" fill="#593d9e" /><circle cx="190" cy="123" r="5" fill="#593d9e" />
+                <path d="m150 137 7 5 7-6" fill="#ff829f" stroke="#593d9e" stroke-width="3" stroke-linejoin="round" />
+                <path d="M156 143c0 7-5 11-11 11m11-11c1 7 6 10 13 9" fill="none" stroke="#593d9e" stroke-width="3" stroke-linecap="round" />
+                <path d="M110 145H81m29 8-28 7m118-17 29-3m-28 12 28 7" stroke="#593d9e" stroke-width="3" stroke-linecap="round" opacity=".65" />
+                <path d="M107 185c12-14 18-22 26-28l24 23 22-24c11 7 18 14 25 27-27 23-70 26-97 2Z" fill="#8c73ef" />
+                <circle cx="129" cy="179" r="4" fill="#fff" /><circle cx="181" cy="178" r="4" fill="#fff" />
+              </svg>
+              <div class="speech-bubble">Cố lên nào! <span>♥</span></div>
+            </div>
+          </div>
+
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">LỘ TRÌNH CỦA BÉ</span>
+              <h2>Từ một ngón đến mười ngón</h2>
+            </div>
+            <div class="journey-progress">
+              <span id="journey-label">0/10 chặng</span>
+              <div class="progress-track"><span id="journey-progress-bar"></span></div>
+            </div>
+          </div>
+
+          <div class="lesson-grid" id="lesson-grid" aria-live="polite"></div>
+
+          <section class="tip-card">
+            <div class="tip-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M9 18h6m-5 3h4m4-10a6 6 0 1 0-10 4.5c.7.6 1 1.3 1 2.5h6c0-1.2.3-1.9 1-2.5a6 6 0 0 0 2-4.5Z" /></svg>
+            </div>
+            <div>
+              <strong>Mẹo nhỏ của Miu</strong>
+              <p>Hai phím <kbd>F</kbd> và <kbd>J</kbd> có một gờ nhỏ. Bé hãy sờ thử để tìm đúng vị trí mà không cần nhìn xuống nhé!</p>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="practice-view" aria-labelledby="practice-title">
+          <div class="practice-topline">
+            <button class="back-button" id="back-home" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+              Hành trình
+            </button>
+            <div class="lesson-switcher">
+              <button id="prev-lesson" type="button" aria-label="Bài trước"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></svg></button>
+              <span id="practice-stage-label">Chặng 1 / 10</span>
+              <button id="next-lesson" type="button" aria-label="Bài tiếp theo"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6" /></svg></button>
+            </div>
+          </div>
+
+          <div class="practice-layout">
+            <div class="practice-main">
+              <article class="typing-card">
+                <div class="typing-card-header">
+                  <div>
+                    <span class="lesson-tag" id="practice-tag">LÀM QUEN</span>
+                    <h2 id="practice-title">Ngón trỏ phải thức giấc</h2>
+                    <p id="practice-description">Dùng ngón trỏ phải để chạm phím J.</p>
+                  </div>
+                  <div class="round-number" id="round-number">1 / 3</div>
+                </div>
+
+                <div class="stats-row" aria-label="Thống kê lượt luyện">
+                  <div class="stat-item">
+                    <span class="stat-icon purple" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 7v5l3 2m6-2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg></span>
+                    <div><span>Tốc độ</span><strong><b id="wpm-value">0</b> WPM</strong></div>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-icon green" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6" /></svg></span>
+                    <div><span>Chính xác</span><strong><b id="accuracy-value">100</b>%</strong></div>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-icon orange" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3c2 4-1 5-1 8 0 2 1 3 3 3 3 0 4-3 3-6 3 2 4 5 3 8a8 8 0 0 1-15 0c-1-4 1-7 4-10 0 3 1 5 3 5 2-2 0-5 0-8Z" /></svg></span>
+                    <div><span>Liên tiếp</span><strong><b id="streak-value">0</b> phím</strong></div>
+                  </div>
+                </div>
+
+                <div class="type-zone" id="type-zone" tabindex="0" role="textbox" aria-label="Khu vực luyện gõ">
+                  <div class="type-zone-hint"><span class="pulse-dot"></span> Gõ ký tự đang sáng</div>
+                  <div class="practice-text" id="practice-text"></div>
+                  <div class="type-progress"><span id="type-progress-bar"></span></div>
+                  <input id="mobile-input" class="mobile-input" type="text" inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Nhập bài luyện" />
+                </div>
+
+                <div class="finger-callout">
+                  <div class="finger-dot" id="finger-dot"></div>
+                  <div>
+                    <span>Ngón tay cần dùng</span>
+                    <strong id="finger-name">Ngón trỏ phải</strong>
+                  </div>
+                  <p id="finger-tip">Đặt ngón trỏ phải lên phím J có gờ nhỏ.</p>
+                </div>
+              </article>
+
+              <div class="keyboard-wrap">
+                <div class="keyboard-top">
+                  <div>
+                    <span class="eyebrow">BÀN PHÍM CỦA BÉ</span>
+                    <h3>Nhìn màn hình, không nhìn tay nhé</h3>
+                  </div>
+                  <div class="finger-legend" aria-label="Chú thích màu ngón tay">
+                    <span><i class="left-pinky"></i>Út</span>
+                    <span><i class="left-ring"></i>Áp út</span>
+                    <span><i class="left-middle"></i>Giữa</span>
+                    <span><i class="left-index"></i>Trỏ</span>
+                  </div>
+                </div>
+                <div class="keyboard" id="keyboard" aria-label="Bàn phím ảo"></div>
+                <div class="hands-guide" aria-hidden="true">
+                  <div class="hand hand-left">
+                    <span class="hand-label">TAY TRÁI</span>
+                    <div class="palm">
+                      <i data-finger="left-pinky"></i><i data-finger="left-ring"></i><i data-finger="left-middle"></i><i data-finger="left-index"></i><i data-finger="left-thumb"></i>
+                    </div>
+                  </div>
+                  <div class="home-reminder"><span>F</span><p>Gờ định vị</p><span>J</span></div>
+                  <div class="hand hand-right">
+                    <span class="hand-label">TAY PHẢI</span>
+                    <div class="palm">
+                      <i data-finger="right-thumb"></i><i data-finger="right-index"></i><i data-finger="right-middle"></i><i data-finger="right-ring"></i><i data-finger="right-pinky"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <aside class="practice-side">
+              <div class="coach-card">
+                <div class="mini-mascot" aria-hidden="true">
+                  <span class="ear ear-left"></span><span class="ear ear-right"></span>
+                  <span class="eye eye-left"></span><span class="eye eye-right"></span>
+                  <span class="nose"></span><span class="mouth"></span>
+                </div>
+                <span class="eyebrow">MIU NHẮC BÉ</span>
+                <h3 id="coach-title">Ngồi thật thoải mái</h3>
+                <p id="coach-message">Lưng thẳng nhẹ, vai thả lỏng và giữ hai cổ tay không tì xuống bàn.</p>
+                <div class="coach-dots"><span class="active"></span><span></span><span></span></div>
+              </div>
+              <div class="mission-card">
+                <div class="mission-heading"><span aria-hidden="true">★</span><strong>Nhiệm vụ chặng này</strong></div>
+                <ul>
+                  <li id="mission-accuracy"><span></span>Đạt 85% chính xác</li>
+                  <li id="mission-streak"><span></span>Gõ đúng 8 phím liên tiếp</li>
+                  <li id="mission-finish"><span></span>Hoàn thành đủ 3 lượt</li>
+                </ul>
+              </div>
+              <button class="restart-button" id="restart-button" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v6h6M5 9a8 8 0 1 1-1 5" /></svg>
+                Làm lại lượt này
+              </button>
+            </aside>
+          </div>
+        </section>
+
+        <section class="view" id="game-view" aria-labelledby="game-view-title">
+          <div class="game-hero">
+            <div class="game-hero-copy">
+              <span class="game-kicker"><span>★</span> VỪA HỌC VỪA CHƠI</span>
+              <h2 id="game-view-title">Gõ phím để mở<br /><em>thế giới diệu kỳ!</em></h2>
+              <p>Chọn một cuộc phiêu lưu, nhìn thật nhanh và giúp những người bạn đáng yêu nhé.</p>
+            </div>
+            <div class="game-hero-art" aria-hidden="true">
+              <span class="game-hero-cloud cloud-a">J</span>
+              <span class="game-hero-cloud cloud-b">F</span>
+              <span class="game-hero-balloon">K<i></i></span>
+              <span class="game-hero-dino">●<i></i><b></b></span>
+              <span class="game-hero-star star-a">✦</span>
+              <span class="game-hero-star star-b">★</span>
+            </div>
+          </div>
+
+          <div class="game-section-heading">
+            <div>
+              <span class="eyebrow">BÉ MUỐN CHƠI GÌ?</span>
+              <h2>Chọn một thử thách</h2>
+            </div>
+            <p>Gõ đúng để ghi điểm và nhận sao thưởng</p>
+          </div>
+
+          <div class="game-picker" id="game-picker">
+            <button class="game-choice active" type="button" data-game="cloud">
+              <span class="game-choice-art cloud-choice-art" aria-hidden="true"><i>A</i><i>J</i><b>✦</b></span>
+              <span class="game-choice-copy">
+                <small>NHẸ NHÀNG</small>
+                <strong>Săn mây chữ</strong>
+                <span>Gõ ký tự trước khi mây bay mất</span>
+              </span>
+              <span class="game-choice-record"><small>Kỷ lục</small><b data-record="cloud">0</b></span>
+            </button>
+            <button class="game-choice" type="button" data-game="balloon">
+              <span class="game-choice-art balloon-choice-art" aria-hidden="true"><i>F</i><i>K</i><b>♥</b></span>
+              <span class="game-choice-copy">
+                <small>NHANH TAY</small>
+                <strong>Bóng bay tí hon</strong>
+                <span>Chọc bóng bằng phím đúng thật nhanh</span>
+              </span>
+              <span class="game-choice-record"><small>Kỷ lục</small><b data-record="balloon">0</b></span>
+            </button>
+            <button class="game-choice" type="button" data-game="dino">
+              <span class="game-choice-art dino-choice-art" aria-hidden="true"><i></i><b></b><em>⚑</em></span>
+              <span class="game-choice-copy">
+                <small>PHIÊU LƯU</small>
+                <strong>Khủng long về đích</strong>
+                <span>Mỗi phím đúng là một bước chạy</span>
+              </span>
+              <span class="game-choice-record"><small>Kỷ lục</small><b data-record="dino">0</b></span>
+            </button>
+          </div>
+
+          <section class="game-console" id="game-console" aria-labelledby="active-game-title">
+            <header class="game-console-header">
+              <div class="active-game-name">
+                <span class="active-game-icon" id="active-game-icon" aria-hidden="true">☁</span>
+                <div>
+                  <span class="eyebrow" id="active-game-kicker">TRÒ CHƠI 01</span>
+                  <h2 id="active-game-title">Săn mây chữ</h2>
+                </div>
+              </div>
+              <div class="game-difficulty" aria-label="Chọn độ khó">
+                <span>Phím xuất hiện:</span>
+                <button class="active" type="button" data-difficulty="journey">Theo lộ trình</button>
+                <button type="button" data-difficulty="letters">A–Z</button>
+                <button type="button" data-difficulty="mixed">A–Z + số</button>
+              </div>
+            </header>
+
+            <div class="game-stats" aria-label="Thống kê trò chơi">
+              <div><span class="game-stat-icon score-icon" aria-hidden="true">★</span><small>Điểm</small><strong id="game-score">0</strong></div>
+              <div><span class="game-stat-icon combo-icon" aria-hidden="true">⚡</span><small>Liên tiếp</small><strong>x<span id="game-combo">0</span></strong></div>
+              <div><span class="game-stat-icon time-icon" aria-hidden="true">◷</span><small>Thời gian</small><strong><span id="game-time">35</span>s</strong></div>
+              <div><span class="game-stat-icon heart-icon" aria-hidden="true">♥</span><small>Cơ hội</small><strong id="game-lives" aria-label="3 cơ hội">♥ ♥ ♥</strong></div>
+            </div>
+
+            <div class="game-finger-coach" id="game-finger-coach" aria-live="polite">
+              <div class="game-finger-copy">
+                <span class="finger-coach-icon" aria-hidden="true">☝</span>
+                <div>
+                  <small>MIU CHỈ TAY CHO BÉ</small>
+                  <strong id="game-finger-name">Ngón trỏ phải</strong>
+                  <p id="game-finger-hint">Dùng ngón trỏ phải để gõ phím J</p>
+                </div>
+              </div>
+              <div class="game-hand-display" aria-hidden="true">
+                <div class="game-mini-hand game-mini-hand-left">
+                  <span>TAY TRÁI</span>
+                  <div class="game-mini-palm">
+                    <i data-game-finger="left-pinky"></i>
+                    <i data-game-finger="left-ring"></i>
+                    <i data-game-finger="left-middle"></i>
+                    <i data-game-finger="left-index"></i>
+                    <i data-game-finger="left-thumb"></i>
+                  </div>
+                </div>
+                <div class="game-focus-key">
+                  <small>PHÍM CẦN GÕ</small>
+                  <kbd id="game-target-key">J</kbd>
+                </div>
+                <div class="game-mini-hand game-mini-hand-right">
+                  <span>TAY PHẢI</span>
+                  <div class="game-mini-palm">
+                    <i data-game-finger="right-thumb"></i>
+                    <i data-game-finger="right-index"></i>
+                    <i data-game-finger="right-middle"></i>
+                    <i data-game-finger="right-ring"></i>
+                    <i data-game-finger="right-pinky"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="game-stage" id="game-stage" data-game="cloud" tabindex="0" role="application" aria-label="Khu vực trò chơi gõ phím">
+              <div class="game-sky" aria-hidden="true">
+                <span class="sky-sun"></span>
+                <span class="sky-cloud sky-cloud-one"></span>
+                <span class="sky-cloud sky-cloud-two"></span>
+                <span class="sky-spark sky-spark-one">✦</span>
+                <span class="sky-spark sky-spark-two">✦</span>
+                <span class="far-hill"></span>
+                <span class="near-hill"></span>
+                <span class="game-flowers">✿　✿　✿　✿</span>
+              </div>
+              <div class="game-target-layer" id="game-target-layer" aria-live="polite"></div>
+
+              <div class="dino-world" id="dino-world" aria-hidden="true">
+                <div class="dino-prompt-wrap">
+                  <small>GÕ PHÍM ĐANG SÁNG</small>
+                  <div class="dino-prompt" id="dino-prompt"></div>
+                </div>
+                <div class="dino-track">
+                  <span class="track-start">BẮT ĐẦU</span>
+                  <span class="track-dots"></span>
+                  <span class="finish-flag"><i></i><b></b><em>ĐÍCH</em></span>
+                  <span class="running-dino" id="running-dino"><i class="dino-eye"></i><i class="dino-leg leg-one"></i><i class="dino-leg leg-two"></i><b class="dino-tail"></b></span>
+                </div>
+              </div>
+
+              <div class="game-feedback" id="game-feedback" aria-live="polite"></div>
+              <div class="game-overlay" id="game-overlay">
+                <div class="overlay-mascot" id="overlay-mascot" aria-hidden="true">☁</div>
+                <span class="eyebrow" id="game-overlay-kicker">SẴN SÀNG CHƯA?</span>
+                <h3 id="game-overlay-title">Săn những đám mây chữ</h3>
+                <p id="game-overlay-message">Gõ ký tự trên mây trước khi chúng bay khỏi bầu trời nhé!</p>
+                <div class="game-result-row" id="game-result-row" hidden>
+                  <div><strong id="game-final-score">0</strong><span>Điểm</span></div>
+                  <div><strong id="game-final-best">0</strong><span>Kỷ lục</span></div>
+                  <div><strong id="game-final-stars">+0</strong><span>Ngôi sao</span></div>
+                </div>
+                <button class="game-start-button" id="game-start-button" type="button">Bắt đầu chơi <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" /></svg></button>
+                <small class="keyboard-hint"><kbd>J</kbd> Bé chỉ cần dùng bàn phím để chơi</small>
+              </div>
+              <input id="game-mobile-input" class="mobile-input" type="text" inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Nhập phím trong trò chơi" />
+            </div>
+
+            <footer class="game-console-footer">
+              <div class="game-howto"><span aria-hidden="true">💡</span><p id="game-howto-text"><strong>Cách chơi:</strong> Nhìn ký tự trên mây rồi gõ đúng phím đó.</p></div>
+              <button class="game-stop-button" id="game-stop-button" type="button" disabled><svg viewBox="0 0 24 24"><path d="M5 5h14v14H5z" /></svg>Dừng lượt chơi</button>
+            </footer>
+          </section>
+
+          <div class="game-rewards">
+            <div class="reward-title"><span aria-hidden="true">🏆</span><div><strong>Góc kỷ lục của bé</strong><p>Cố gắng phá kỷ lục của chính mình nhé!</p></div></div>
+            <div class="record-pills">
+              <span><i class="record-cloud">☁</i>Săn mây <strong data-record="cloud">0</strong></span>
+              <span><i class="record-balloon">●</i>Bóng bay <strong data-record="balloon">0</strong></span>
+              <span><i class="record-dino">◆</i>Khủng long <strong data-record="dino">0</strong></span>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="achievements-view" aria-labelledby="achievements-title">
+          <div class="collection-hero">
+            <div>
+              <span class="eyebrow">GÓC TỰ HÀO</span>
+              <h2 id="achievements-title">Bộ sưu tập huy hiệu</h2>
+              <p>Mỗi lần kiên trì luyện tập, bé lại mở khóa thêm một người bạn mới.</p>
+            </div>
+            <div class="collection-score"><span id="collection-stars">0</span><small>ngôi sao đã nhặt</small></div>
+          </div>
+          <div class="badge-grid" id="badge-grid"></div>
+        </section>
+      </main>
+    </div>
+
+    <div class="celebration" id="celebration" role="dialog" aria-modal="true" aria-labelledby="celebration-title" hidden>
+      <div class="confetti" aria-hidden="true"></div>
+      <div class="celebration-card">
+        <button class="celebration-close" id="celebration-close" type="button" aria-label="Đóng">×</button>
+        <div class="trophy" aria-hidden="true">★</div>
+        <span class="eyebrow">TUYỆT VỜI QUÁ!</span>
+        <h2 id="celebration-title">Bé đã hoàn thành một lượt!</h2>
+        <p id="celebration-message">Miu tặng bé một ngôi sao thật sáng.</p>
+        <div class="result-summary">
+          <div><strong id="result-accuracy">100%</strong><span>Chính xác</span></div>
+          <div><strong id="result-wpm">0</strong><span>WPM</span></div>
+          <div><strong id="result-stars">+1</strong><span>Ngôi sao</span></div>
+        </div>
+        <button class="primary-button" id="continue-button" type="button">Luyện lượt tiếp theo <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" /></svg></button>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
