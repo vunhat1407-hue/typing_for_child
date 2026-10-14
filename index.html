@@ -8,9 +8,10 @@
       content="Mây Gõ Phím - hành trình học gõ 10 ngón vui nhộn dành cho bé."
     />
     <meta name="theme-color" content="#7559e8" />
-    <title>Mây Gõ Phím — Học gõ 10 ngón thật vui</title>
+    <title>Làm quen với tin học — Học mà chơi thật vui</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="mouse-games.css" />
   </head>
   <body>
     <div class="app-shell">
@@ -26,7 +27,7 @@
               <path d="M33 38c1.5 1.3 2.7 1.3 4 0" fill="none" stroke="#493698" stroke-width="2" stroke-linecap="round" />
             </svg>
           </span>
-          <span>Mây Gõ Phím</span>
+          <span>Làm quen với tin học</span>
         </a>
 
         <nav class="main-nav">
@@ -41,6 +42,12 @@
               <svg viewBox="0 0 24 24"><path d="M5 7h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Zm1 4h2m2 0h2m2 0h2m2 0h1M6 15h2m2 0h6m2 0h1" /></svg>
             </span>
             Luyện tập
+          </button>
+          <button class="nav-item" type="button" data-view="mouse-games">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0-6 6v6a6 6 0 0 0 12 0V9a6 6 0 0 0-6-6Zm0 0v6m-6 0h12" /></svg>
+            </span>
+            Làm quen chuột
           </button>
           <button class="nav-item" type="button" data-view="game">
             <span class="nav-icon" aria-hidden="true">
@@ -453,7 +460,24 @@
           </div>
         </section>
 
-        <section class="view" id="achievements-view" aria-labelledby="achievements-title">
+        <section class="view" id="mouse-games-view" aria-labelledby="mouse-games-title">
+    <div class="mouse-hero">
+      <div><span class="eyebrow">LÀM QUEN VỚI CHUỘT MÁY TÍNH</span><h2 id="mouse-games-title">Bấm, kéo và khám phá!</h2><p>Học cách điều khiển chuột qua những trò chơi nhỏ thật vui. Bé có thể dùng chuột hoặc phím mũi tên.</p></div>
+      <div class="mouse-hero-art" aria-hidden="true"><span class="castle">♜</span><span class="mouse-pointer">⌁</span></div>
+    </div>
+    <div class="mouse-game-grid">
+      <article class="mouse-game-card featured" data-mouse-game="castle-run">
+        <div class="mouse-game-card-top"><span class="mouse-game-icon princess">♕</span><span class="mouse-game-number">01</span></div>
+        <h3>Công chúa đến lâu đài</h3><p>Di chuyển trái phải, né 20 cây và vũng nước. Va chạm sẽ biến công chúa thành Lọ Lem xấu xí!</p><button type="button" class="primary-button mouse-play-button">Chơi ngay <span aria-hidden="true">→</span></button>
+      </article>
+      <article class="mouse-game-card" data-mouse-game="star-hunt"><div class="mouse-game-card-top"><span class="mouse-game-icon star">★</span><span class="mouse-game-number">02</span></div><h3>Săn sao lấp lánh</h3><p>Di chuyển con trỏ thật nhanh để chạm vào 10 ngôi sao đang trốn trên bầu trời.</p><button type="button" class="secondary-button mouse-play-button">Bắt đầu</button></article>
+      <article class="mouse-game-card" data-mouse-game="treasure"><div class="mouse-game-card-top"><span class="mouse-game-icon chest">▣</span><span class="mouse-game-number">03</span></div><h3>Kéo kho báu về rương</h3><p>Giữ chuột, kéo những viên đá quý vào đúng chiếc rương báu của mình.</p><button type="button" class="secondary-button mouse-play-button">Bắt đầu</button></article>
+      <article class="mouse-game-card" data-mouse-game="find-it"><div class="mouse-game-card-top"><span class="mouse-game-icon find">⌕</span><span class="mouse-game-number">04</span></div><h3>Tìm đúng hình</h3><p>Rèn khả năng quan sát: hãy tìm và bấm đúng hình mẫu trước khi hết giờ.</p><button type="button" class="secondary-button mouse-play-button">Bắt đầu</button></article>
+    </div>
+    <section class="mouse-playground" id="mouse-playground" hidden aria-live="polite"><div class="playground-header"><div><span class="eyebrow" id="mouse-game-kicker">MINI GAME 01</span><h2 id="mouse-game-title">Công chúa đến lâu đài</h2></div><button class="secondary-button" id="mouse-close-game" type="button">Đóng trò chơi</button></div><div class="playground-stats"><span>Điểm <strong id="mouse-score">0</strong></span><span>Tiến độ <strong id="mouse-progress">0/20</strong></span><span id="mouse-hint">Dùng ← → hoặc rê chuột để di chuyển</span></div><div class="mouse-stage" id="mouse-stage" tabindex="0"><div class="mouse-instruction" id="mouse-instruction">Bấm “Bắt đầu” để giúp công chúa về lâu đài</div><div id="mouse-world"></div></div><button class="primary-button" id="mouse-start" type="button">Bắt đầu chơi</button></section>
+  </section>
+  
+  <section class="view" id="achievements-view" aria-labelledby="achievements-title">
           <div class="collection-hero">
             <div>
               <span class="eyebrow">GÓC TỰ HÀO</span>
@@ -486,5 +510,6 @@
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script src="app.js"></script>
+  <script src="mouse-games.js"></script>
   </body>
 </html>

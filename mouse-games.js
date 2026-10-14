@@ -1,0 +1,28 @@
+(() => {
+  const playground = document.querySelector('#mouse-playground');
+  if (!playground) return;
+  const stage = document.querySelector('#mouse-stage');
+  const world = document.querySelector('#mouse-world');
+  const title = document.querySelector('#mouse-game-title');
+  const kicker = document.querySelector('#mouse-game-kicker');
+  const score = document.querySelector('#mouse-score');
+  const progress = document.querySelector('#mouse-progress');
+  const instruction = document.querySelector('#mouse-instruction');
+  const games = { 'castle-run': ['Công chúa đến lâu đài','MINI GAME 01'], 'star-hunt': ['Săn sao lấp lánh','MINI GAME 02'], treasure: ['Kéo kho báu về rương','MINI GAME 03'], 'find-it': ['Tìm đúng hình','MINI GAME 04'] };
+  let current='castle-run', running=false, count=0, playerX=10, moveTimer;
+  const update = () => { score.textContent = count * 10; progress.textContent = current === 'castle-run' ? `${count}/20` : `${count}/10`; };
+  const end = (message) => { running=false; clearInterval(moveTimer); instruction.textContent=message; document.querySelector('#mouse-start').textContent='Chơi lại'; update(); };
+  const renderCastle = () => { world.innerHTML='<div class="mouse-player" id="mouse-player">♕</div>'; for(let i=0;i<20;i++){ const item=document.createElement('span'); item.className='mouse-obstacle'; item.textContent=i%2?'💧':'🌳'; item.style.left=`${18+i*3.7}%`; item.style.animationDelay=`-${i%4*.3}s`; world.append(item); } };
+  const renderStars = () => { world.innerHTML=''; for(let i=0;i<10;i++){ const star=document.createElement('button'); star.className='mouse-target'; star.textContent='★'; star.style.left=`${8+(i*31)%82}%`; star.style.top=`${22+(i*47)%58}%`; star.addEventListener('click',()=>{if(!running)return; star.remove(); count++; update(); if(count===10)end('Tuyệt vời! Bé đã săn đủ 10 ngôi sao.');}); world.append(star); } };
+  const renderTreasure = () => { world.innerHTML='<div class="treasure-box" id="treasure-box">▣</div>'; for(let i=0;i<5;i++){ const gem=document.createElement('div'); gem.className='draggable-gem'; gem.textContent='◆'; gem.draggable=true; gem.style.left=`${12+i*15}%`; gem.style.top=`${25+(i%2)*28}%`; gem.addEventListener('dragstart',e=>e.dataTransfer.setData('text/plain',gem.id)); gem.id=`gem-${i}`; world.append(gem); } const box=document.querySelector('#treasure-box'); box.addEventListener('dragover',e=>e.preventDefault()); box.addEventListener('drop',e=>{e.preventDefault();const gem=document.getElementById(e.dataTransfer.getData('text/plain'));if(gem){gem.remove();count++;update();if(count===5)end('Kho báu đã vào rương hết rồi!');}}); };
+  const renderFind = () => { const icons=['●','▲','■','◆']; const target=icons[Math.floor(Math.random()*icons.length)]; world.innerHTML=`<div class="find-choice" style="top:18px;left:50%;transform:translateX(-50%);background:#fff0bd">Mẫu: ${target}</div>`; icons.concat(icons).forEach((icon,i)=>{const b=document.createElement('button');b.className='find-choice';b.textContent=icon;b.style.left=`${12+(i%4)*22}%`;b.style.top=`${42+Math.floor(i/4)*32}%`;b.addEventListener('click',()=>{if(icon===target){count++;update();if(count===10)end('Chính xác! Bé đã tìm đúng 10 lần.');else renderFind();}else instruction.textContent='Chưa đúng, hãy thử lại nhé!';});world.append(b);}); };
+  const render = () => { title.textContent=games[current][0]; kicker.textContent=games[current][1]; count=0; playerX=10; update(); if(current==='castle-run')renderCastle(); if(current==='star-hunt')renderStars(); if(current==='treasure')renderTreasure(); if(current==='find-it')renderFind(); };
+  const checkCollision = () => { if(current !== 'castle-run' || !running) return; const obstacle = [...document.querySelectorAll('.mouse-obstacle')].find(item => Math.abs(parseFloat(item.style.left) - playerX) < 2.2); if(obstacle){ end('Ôi không! Công chúa đã va phải vật cản và thành Lọ Lem xấu xí rồi.'); document.querySelector('#mouse-player').textContent='♙'; stage.classList.remove('castle-success'); } };
+  const start = () => { running=true; count=0; stage.classList.remove('castle-success'); instruction.textContent=current==='castle-run'?'Dùng ← → để né cây và vũng nước!':'Hãy bắt đầu khám phá!'; document.querySelector('#mouse-start').textContent='Đang chơi'; render(); if(current==='castle-run'){ const p=document.querySelector('#mouse-player'); moveTimer=setInterval(()=>{ if(playerX>=82){end('Đến lâu đài rồi! Công chúa đã thắng!');stage.classList.add('castle-success');return;} playerX+=.5; count=Math.min(20,Math.floor((playerX-10)/3.6));p.style.left=`${playerX}%`;update();checkCollision();},120); } };
+  document.querySelectorAll('[data-mouse-game]').forEach(card=>card.querySelector('.mouse-play-button').addEventListener('click',()=>{current=card.dataset.mouseGame;playground.hidden=false;render();playground.scrollIntoView({behavior:'smooth',block:'start'});}));
+  document.querySelector('#mouse-start').addEventListener('click',start); document.querySelector('#mouse-close-game').addEventListener('click',()=>{playground.hidden=true;clearInterval(moveTimer);});
+  document.addEventListener('keydown',e=>{if(!running||current!=='castle-run')return;const p=document.querySelector('#mouse-player');if(e.key==='ArrowLeft')playerX=Math.max(4,playerX-4);if(e.key==='ArrowRight')playerX=Math.min(86,playerX+4);p.style.left=`${playerX}%`;checkCollision();});
+  stage.addEventListener('mousemove',e=>{if(!running||current!=='castle-run')return;const r=stage.getBoundingClientRect();playerX=Math.max(4,Math.min(86,((e.clientX-r.left)/r.width)*100));document.querySelector('#mouse-player').style.left=`${playerX}%`;checkCollision();});
+  render();
+})();
+
